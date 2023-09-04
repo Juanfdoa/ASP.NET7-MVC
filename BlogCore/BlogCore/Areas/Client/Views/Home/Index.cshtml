@@ -1,0 +1,41 @@
+﻿@model BlogCore.Models.ViewModels.HomeVm
+
+<style>
+    .card {
+        height: 100%; /* Altura fija para todas las tarjetas */
+    }
+
+        .card img {
+            max-height: 100%; /* Ajustar la altura de la imagen */
+            width: auto; /* Asegurar que la imagen no se distorsione */
+        }
+</style>
+
+<div class="row titleBackground mt-1">
+    <div class="col-sm-12">
+        <h1 class="text-center py-1">Articles</h1>
+
+    </div>
+</div>
+
+    @if(Model.ArticleList.Count() > 0){
+        <hr/>
+        <div class="row">
+            @foreach(var article in Model.ArticleList.OrderBy(o => o.Id))
+            {
+                <div class="col-4" >
+                    <div class="card"> 
+                        <img src="@article.ImageUrl" class="img-thumbnail" />
+                        <div class="card-body">
+                        <h5 class="text-center">@article.Name</h5>
+                        <a asp-action="Details" class="btn btn-success" style="border-radius:5px" asp-route-id="@article.Id">
+                            More details
+                        </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }else{
+        <p>No hay articulos</p>
+    }

@@ -1,0 +1,58 @@
+﻿@model CrudNet7MVC.Models.Contact
+
+@{
+    ViewData["Title"] = "Eliminar Contacto";
+}
+
+<h1 class="text-center">Contacto con .Net 7 (.Net Core MVC)</h1>
+
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">Delete Contact</h3>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form asp-action="Delete">
+        <div class="card-body">
+            
+
+                <!--ID del usuario como campo oculto-->
+                <input type="hidden" asp-for="Id" />
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" readonly />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Telephone" class="control-label"></label>
+                    <input asp-for="Telephone" class="form-control" readonly />
+                    <span asp-validation-for="Telephone" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Phone" class="control-label"></label>
+                    <input asp-for="Phone" class="form-control" readonly />
+                    <span asp-validation-for="Phone" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" readonly />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+           
+        </div>
+        <!-- /.card-body -->
+        <div class="form-group mt-3">
+            <button type="submit" class="btn btn-primary d-block mx-auto"><i class="bi bi-eraser-fill"></i>Eliminar usuario</button>
+        </div>
+    </form>
+    <div>
+        <a asp-action="Index">Return</a>
+    </div>
+</div>
+
+

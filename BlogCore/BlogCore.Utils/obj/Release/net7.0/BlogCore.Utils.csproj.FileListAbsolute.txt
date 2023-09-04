@@ -1,0 +1,12 @@
+C:\Users\Juan.acevedo\Desktop\Cursos\ASP.NET 7 (.NET Core) MVC\BlogCore\BlogCore.Utils\bin\Release\net7.0\BlogCore.Utils.deps.json
+C:\Users\Juan.acevedo\Desktop\Cursos\ASP.NET 7 (.NET Core) MVC\BlogCore\BlogCore.Utils\bin\Release\net7.0\BlogCore.Utils.dll
+C:\Users\Juan.acevedo\Desktop\Cursos\ASP.NET 7 (.NET Core) MVC\BlogCore\BlogCore.Utils\bin\Release\net7.0\BlogCore.Utils.pdb
+C:\Users\Juan.acevedo\Desktop\Cursos\ASP.NET 7 (.NET Core) MVC\BlogCore\BlogCore.Utils\obj\Release\net7.0\BlogCore.Utils.csproj.AssemblyReference.cache
+C:\Users\Juan.acevedo\Desktop\Cursos\ASP.NET 7 (.NET Core) MVC\BlogCore\BlogCore.Utils\obj\Release\net7.0\BlogCore.Utils.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Juan.acevedo\Desktop\Cursos\ASP.NET 7 (.NET Core) MVC\BlogCore\BlogCore.Utils\obj\Release\net7.0\BlogCore.Utils.AssemblyInfoInputs.cache
+C:\Users\Juan.acevedo\Desktop\Cursos\ASP.NET 7 (.NET Core) MVC\BlogCore\BlogCore.Utils\obj\Release\net7.0\BlogCore.Utils.AssemblyInfo.cs
+C:\Users\Juan.acevedo\Desktop\Cursos\ASP.NET 7 (.NET Core) MVC\BlogCore\BlogCore.Utils\obj\Release\net7.0\BlogCore.Utils.csproj.CoreCompileInputs.cache
+C:\Users\Juan.acevedo\Desktop\Cursos\ASP.NET 7 (.NET Core) MVC\BlogCore\BlogCore.Utils\obj\Release\net7.0\BlogCore.Utils.dll
+C:\Users\Juan.acevedo\Desktop\Cursos\ASP.NET 7 (.NET Core) MVC\BlogCore\BlogCore.Utils\obj\Release\net7.0\refint\BlogCore.Utils.dll
+C:\Users\Juan.acevedo\Desktop\Cursos\ASP.NET 7 (.NET Core) MVC\BlogCore\BlogCore.Utils\obj\Release\net7.0\BlogCore.Utils.pdb
+C:\Users\Juan.acevedo\Desktop\Cursos\ASP.NET 7 (.NET Core) MVC\BlogCore\BlogCore.Utils\obj\Release\net7.0\ref\BlogCore.Utils.dll

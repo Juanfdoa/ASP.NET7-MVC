@@ -1,0 +1,273 @@
+CRUD
+HERRAMIENTAS NECESARIAS
+1. Visual Studio Comunity
+2. .Net 7
+3. Sql Server - Sql Server Management Studio
+
+CREAR PROYECTO
+1. ASP.NET Core Web App (Model-view-controller)
+2. Framework .Net 7
+3. Authentication type: individual Accounts
+
+CADENA DE CONEXION
+{
+  "ConnectionStrings": {
+    "ConexionSql": "server=MNB179\\SQLEXPRESS;Database=CrudNet7;Trusted_Connection=True;Encrypt=False;MultipleActiveResultSets=true"
+  },
+
+EXTENSIONES
+Microsoft.EntityFrameworkCore.SqlServer version 7
+Microsoft.EntityFrameworkCore.Tools version 7
+
+CONTEXTO
+Crear carpeta Data, agregar clase -> ApplicationDbContext hereda de DbContext
+
+MODELOS
+Crear Modelos
+
+CONEXION
+program.cs
+//Configuramos la conexion a sql server
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("ConexionSql")));
+
+MIGRATIONS => code firts
+Package Manager Console
+add-migration initial-migration-Contact
+update-database
+
+PROYECTO
+CREACION DE LA LIBRERIA DE CLASES
+click derecho sobre la solucion-> nuevo proyecto -> Biblioteca de clases "BlogCore.AccesoDatos"
+click derecho sobre la solucion-> nuevo proyecto -> Biblioteca de clases "BlogCore.Models"
+click derecho sobre la solucion-> nuevo proyecto -> Biblioteca de clases "BlogCore.Utilidades"
+
+EXTENSIONES
+AccesoDatos
+Microsoft.EntityFrameworkCore.SqlServer              version 7
+Microsoft.EntityFrameworkCore.Tools                  version 7
+Microsoft.AspNetCore.identity.EntityFrameworkCore    version 7
+Microsoft.EntityFrameworkCore                        version 7
+
+ORGANIZACION DEL PROYECTO EN AREAS
+BlogCore -> Areas -> click derecho -> agregar nueva area -> MVC Area "Admin"
+BlogCore -> Areas -> click derecho -> agregar nueva area -> MVC Area "Client"
+eliminamos las carpetas model y data dentro de las 2 areas creadas anteriormente
+Mover el HomeController de Controllers a Areas->Client->Controller y luego eliminar la carpeta Controllers
+Mover carpeta Home de Views a Area->Client->Views
+Copiar los archivos con extension cshtml de la carpeta views y los pegamos en views de las areas (Client,Admin)
+En los archivos _ViewStart.cshtml modificamos la ruta para buscar el archivo _layout  "~/Views/Shared/_Layout.cshtml"
+configurar el program para arrancar la app program-> app.MapControllerRoute-> Patter y agregamos en area de inicio {area=Client}/{controller=Home}/{action=Index}/{id?}"
+Decorar los controller [Area("Client")]
+
+ORGANIZACION DEL PROYECTO POR NIVELES
+Mover el archivo dentro de la carpeta Models a el proyecto BlogCore.Models y eliminar la carpeta Models
+Dentro del proyecto BlogCore.Models creamos una carpeta llamada "ViewModels"
+Mover la carpeta Data a BlogCore.DataAccess y sacar la carpeta Migrations a nivel del proyecto
+Eliminamos la carpeta Data del BlogCore.
+
+BlogCore -> Dependencias -> Click derecho -> agregar referencia -> BlogCore.DataAcces
+BlogCore.DataAcess ->Dependencias -> Click derecho -> agregar referencia -> Blogcore.Models , BlogCore.Utils
+
+CONFIGURACION DE BOOTSTRAP Y BOOTSWATCH
+ir a la pagina de Bootswatch https://bootswatch.com/
+Escojemos en tema de preferencia y lo descargamos como bootstrap.css
+abrimos el archivo descargado copiamos todo y lo pegamos en wwwroot->lib->bootstrap->dist->css->bootstrap.css y reemplazmos todo
+Luego vamos a View->Shared->_Layout.cshtml y en la libreria de bootstrap eliminamos el min para que busque el archivo bootstrap.css
+
+
+Instalacion de Plugins Frontend
+https://datatables.net/
+https://jqueryui.com/
+toastr.examples
+https://sweetalert2.github.io/
+
+<!--Css todos-->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css" />
+
+
+<!--Js plugins-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.serializeJSON/2.9.0/jquery.serializejson.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
+<script src="https://kit.fontawesome.com/0f48d8c00d.js" crossorigin="anonymous"></script>
+
+CONEXION SQL, CONTEXT, MIGRACIONES Y BASE DE DATOS
+appsettings.json 
+{
+  "ConnectionStrings": {
+    "ConexionSql": "server=MNB179\\SQLEXPRESS;Database=BlogCore;Trusted_Connection=True;Encrypt=False;MultipleActiveResultSets=true"
+  },
+
+program.cs
+//Configuramos la conexion a sql server
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("ConexionSql")));
+
+migracion -> BlogCore.DataAccess
+tools->console
+add-migration InitialMigration
+update-database
+
+CREACION MODELOS
+BlogCore.Models
+Click derecho -> class
+agregar dbSet BlogCore.DataAcess-> Data-> ApplicationDbContext
+
+
+REPOSITORY PATTERN -> PATRON REPOSITORIO
+BlogCore.DataAcess-> Data -> Crear carpeta "Repository"
+Dentro de la carpeta Repository creamos una subcarpeta "IRepository"
+Dentro de IRepository creamos una interfaz IRepository (Generica)
+en Repository creamos las clase Repository (Generica)
+
+Crear repositorios especificos por modelo (categoria)
+
+Implementar unit of work o unidad de trabajo
+
+CATEGORIAS
+Crear controlador
+
+AGREGAR CONTENEDOR DE TRABAJO COMO INYECCION DE DEPENDENCIAS
+program.cs
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+SOLUCION ERROR NULLABLE
+blogCore.Model -> click derecho -> editar archivo del proyecto
+en la etiqueta nullable cambiamos enable por disable
+
+
+IDENTITY (AUTENTICACIÓN)
+Hacer scaffold para recuperar las vistas de identity
+Click derecho -> BlogCore -> agregar -> nuevo elemento con scaffold -> identidad
+Seleccionar pagina maestra -> seleccionar los 3 puntos -> -> views -> shared -> _Layout.cshtml
+Seeccionar todos los checkbox o solo los que se vayan a utilizar
+Eliminar la carpeta data -> si esta es generada
+
+Agregar mas Campos al Identity
+Crear modelo -> ApplicationUser, este heredara de IdentityUser y agregamos las nuevas propiedades
+Registrar el DbSet en el DbContext
+Crear migracion
+modificar el program.cs
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<ApplicationDbContext>();
+personalizar vistas
+Renombrar todos los identityUser por ApplicationUser
+configurar el registermodel (InputModel - OnPostAsync)
+
+IMPLEMENTAR ROLES
+Crear clase en blogCore.Utils llamada CNT
+Crear roles
+modificar el register para agregar rol
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false)
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultUI();
+
+IDENTITY (AUTORIZATION)
+PROTECCION A NIVEL DE VISTA
+ @if(User.IsInRole(CNT.Admin)){
+  <li class="nav-item dropdown">
+     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Content</a>
+        <div class="dropdown-menu">
+           <a class="dropdown-item" asp-area="Admin" asp-controller="Categories" asp-action="Index">Categories</a>
+           <a class="dropdown-item" asp-area="Admin" asp-controller="Articles" asp-action="Index">Articles</a>
+           <a class="dropdown-item" asp-area="Admin" asp-controller="Sliders" asp-action="Index">Sliders</a>
+           <a class="dropdown-item" asp-area="Admin" asp-controller="Users" asp-action="Index">Users</a>
+         </div>
+   </li>
+}
+
+PROTECCION A NIVEL DE CONTROLADOR
+[Authorize(Roles ="Admin")]
+
+
+SIEMBRA DE DATOS (Seeding)
+DataAccess -> Data -> crear carpeta(Initializer)
+Crear interfaz y la clase que implementa la interfaz
+program.cs -> 
+//Siembra de datos
+builder.Services.AddScoped<IInitializerDb, InitializerDb>();
+//metodo que ejecuta la siembra de datos
+SeedingData();
+//Funcionalidad siembrta de datos
+void SeedingData()
+{
+    using(var scope = app.Services.CreateScope())
+    {
+        var initilizerDb = scope.ServiceProvider.GetRequiredService<IInitializerDb>();
+        initilizerDb.Initializer();
+    }
+}
+comando: update-database
+
+EVIO DE EMAIL CON MAILKIT
+instalamos netCore.mailkit en package manager
+
+INGENIERIA INVERSA (toma las tablas de la base de datos y crea el modelo en .net)
+instalar microsoft.entotyframeworcore.tools
+instalar microsoft.entotyframeworcore.sqlServer
+Ejecutar el siguiente comando
+Scaffold-DbContext 'Cadena de conexion en camillas simples' Microsoft.EntityFrameworkCore.SqlServer
+
+
+PROCEDIMIENTOS ALMACENADOS
+Opcion # 1 sobre la base de datos
+Abrir sql Management
+base datos -> Programability -> System Stored Procedures
+new query
+create procedure spGetCategories
+as
+begin
+	select * from Category
+end
+
+exec spGetCategories
+
+Opcion # 2 mediante Migraciones
+add-migration ProcedimientoSpGetCategories sobre DataAccess
+en el metodo up
+protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            string procedimiento = @"create procedure spGetCategories
+                                as
+                                begin
+	                                select * from Category
+                                end";
+            migrationBuilder.Sql(procedimiento);
+        }
+
+en el metodo down
+protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            string procedimiento = @"drop procedure spGetCategories";
+            migrationBuilder.Sql(procedimiento);
+
+        }
+
+Llamada desde el controlador
+var categories = _context.Category.FromSqlRaw<Category>("spGetCategories").ToList();
+            return Json(new { data = categories});
+
+
+
+AUTOCOMPLETE PLUGIN JQUERY UI 
+Librerias
+css: <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+js:  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+

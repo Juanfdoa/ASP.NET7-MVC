@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "BlogCore.Utils/1.0.0": {
+        "runtime": {
+          "BlogCore.Utils.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BlogCore.Utils/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
